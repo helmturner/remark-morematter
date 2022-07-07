@@ -27,9 +27,17 @@ export type Options = {
 };
 
 export type Handler = {
-  parser: (argument0: string) => unknown;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  validator?: (...arguments_: any[]) => any;
+  parser: (frontmatter: string) => unknown;
+  /**
+   * A validation function that receives the parsed frontmatter value.
+   * This function should not return a value, but instead throw an error if the parsed value is invalid.
+   * 
+   * *If using an external validator that doesn't match this signature, consider wrapping it in an arrow function to avoid type errors.*
+   * @param value The parsed frontmatter value
+   * @throws if the value is invalid
+   * @returns {void} if the value is valid
+   */
+  validator?: (parsedValue: unknown) => void;
   name?: string;
 };
 
