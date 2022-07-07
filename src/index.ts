@@ -47,7 +47,7 @@ export type Handler = {
  * @param settings The settings object passed to the remark-validate plugin
  */
 const remarkMorematter: Plugin<[Options|null], Root, Root> = function (
-  settings = {}
+  settings
 ) {
   const { failOnError = true, handlers = {} } = settings ?? {};
   if (handlers["root"])
