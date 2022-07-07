@@ -46,10 +46,10 @@ export type Handler = {
  * Otherwise, errors are stored as messages on the VFile.
  * @param settings The settings object passed to the remark-validate plugin
  */
-const remarkMorematter: Plugin<[Options], Root, Root> = function (
+const remarkMorematter: Plugin<[Options|null], Root, Root> = function (
   settings = {}
 ) {
-  const { failOnError = true, handlers = {} } = settings;
+  const { failOnError = true, handlers = {} } = settings ?? {};
   if (handlers["root"])
     throw new Error("remark-morematter: handlers for 'root' are not supported");
 
