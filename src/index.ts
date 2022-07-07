@@ -28,7 +28,8 @@ export type Options = {
 
 export type Handler = {
   parser: (argument0: string) => unknown;
-  validator?: (...arguments_: unknown[]) => unknown;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  validator?: (...arguments_: any[]) => any;
   name?: string;
 };
 
