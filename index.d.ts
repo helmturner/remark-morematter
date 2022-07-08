@@ -20,8 +20,17 @@ export declare type Options = {
     };
 };
 export declare type Handler = {
-    parser: (argument0: string) => unknown;
-    validator?: (...arguments_: unknown[]) => unknown;
+    parser: (frontmatter: string) => unknown;
+    /**
+     * A validation function that receives the parsed frontmatter value.
+     * This function should not return a value, but instead throw an error if the parsed value is invalid.
+     *
+     * *If using an external validator that doesn't match this signature, consider wrapping it in an arrow function to avoid type errors.*
+     * @param value The parsed frontmatter value
+     * @throws if the value is invalid
+     * @returns {void} if the value is valid
+     */
+    validator?: (parsedValue: unknown) => void;
     name?: string;
 };
 /**
@@ -38,6 +47,6 @@ export declare type Handler = {
  * Otherwise, errors are stored as messages on the VFile.
  * @param settings The settings object passed to the remark-validate plugin
  */
-declare const remarkMorematter: Plugin<[Options], Root, Root>;
+declare const remarkMorematter: Plugin<[Options | null], Root, Root>;
 export default remarkMorematter;
 //# sourceMappingURL=index.d.ts.map

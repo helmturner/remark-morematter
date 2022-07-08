@@ -1,7 +1,6 @@
 {
     "name": "remark-morematter",
     "version": "1.0.0",
-    "type": "module",
     "engines": {
       "node": ">=14.16"
     },
