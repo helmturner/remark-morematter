@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.MultiError = void 0;
-const unist_util_visit_1 = require("unist-util-visit");
-class MultiError extends Error {
+import { visit } from "unist-util-visit";
+export class MultiError extends Error {
     constructor(errors) {
         super(`Multiple Errors Occured:`);
         Object.defineProperty(this, "errors", {
@@ -15,7 +12,6 @@ class MultiError extends Error {
         this.errors = errors;
     }
 }
-exports.MultiError = MultiError;
 /**
  * Parses, stores, and optionally validates the contents of frontmatter blocks pasred by remark-frontmatter.
  *
@@ -39,11 +35,10 @@ const remarkMorematter = function (settings) {
         for (const key in handlers) {
             const { parser, validator, name = key } = handlers[key];
             const results = [];
-            (0, unist_util_visit_1.visit)(tree, key, (node, index, parent) => {
+            visit(tree, key, (node, index, parent) => {
                 throwOnInvalidNodeType(node.type);
                 //@ts-expect-error: We've already excluded invalid node types
                 const value = parser(node.value);
-                node.type;
                 try {
                     validator && validator(value);
                 }
@@ -54,9 +49,10 @@ const remarkMorematter = function (settings) {
                 }
                 results.push(value);
                 // Remove this node from the tree
-                parent && index && parent.children.splice(index, 1);
+                !!parent && !!index && parent.children.splice(index, 1);
                 // Since we removed a node, continue visiting at the same index to avoid skipping nodes
-                return index;
+                if (index)
+                    return ++index;
             });
             file.data[name] = results;
         }
@@ -93,4 +89,4 @@ function throwOnInvalidNodeType(type) {
         throw new Error(`remark-morematter: handling ${type} node types is not supported`);
     }
 }
-exports.default = remarkMorematter;
+export default remarkMorematter;

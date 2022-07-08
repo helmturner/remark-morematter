@@ -72,7 +72,6 @@ const remarkMorematter: Plugin<[Options|null], Root, Root> = function (
         throwOnInvalidNodeType(node.type);
         //@ts-expect-error: We've already excluded invalid node types
         const value = parser(node.value);
-        node.type;
         try {
           validator && validator(value);
         } catch (error) {
@@ -82,9 +81,9 @@ const remarkMorematter: Plugin<[Options|null], Root, Root> = function (
         }
         results.push(value);
         // Remove this node from the tree
-        parent && index && parent.children.splice(index, 1);
+        !!parent && !!index && parent.children.splice(index, 1);
         // Since we removed a node, continue visiting at the same index to avoid skipping nodes
-        return index;
+        if (index) return ++index;
       });
       file.data[name] = results;
     }
