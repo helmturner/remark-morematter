@@ -30,8 +30,8 @@ exports.MultiError = MultiError;
  * Otherwise, errors are stored as messages on the VFile.
  * @param settings The settings object passed to the remark-validate plugin
  */
-const remarkMorematter = function (settings = {}) {
-    const { failOnError = true, handlers = {} } = settings;
+const remarkMorematter = function (settings) {
+    const { failOnError = true, handlers = {} } = settings !== null && settings !== void 0 ? settings : {};
     if (handlers["root"])
         throw new Error("remark-morematter: handlers for 'root' are not supported");
     const transformer = function (tree, file) {
