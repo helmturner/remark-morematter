@@ -104,6 +104,9 @@ const remarkMorematter: Plugin<[Options | null], Root, Root> = function (
       });
       file.data[name] = results;
     }
+    if (errors.length > 0) {
+      throw new MultiError(errors);
+    }
   };
 };
 

@@ -1,4 +1,4 @@
-import { Plugin } from "unified";
+import type { Plugin } from "unified";
 import type { Root } from "mdast";
 export declare class MultiError extends Error {
     errors: Error[];

@@ -63,6 +63,9 @@ const remarkMorematter = function (settings) {
             });
             file.data[name] = results;
         }
+        if (errors.length > 0) {
+            throw new MultiError(errors);
+        }
     };
 };
 export default remarkMorematter;
