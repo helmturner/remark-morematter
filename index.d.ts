@@ -48,6 +48,6 @@ export declare type Handler<Output = unknown> = {
  * Otherwise, errors are stored as messages on the VFile.
  * @param settings The settings object passed to the remark-validate plugin
  */
-declare const remarkMorematter: Plugin<[Options | null], Root, Root>;
+declare const remarkMorematter: Plugin<[(Options | undefined | void)?], Root, Root>;
 export default remarkMorematter;
 //# sourceMappingURL=index.d.ts.map
